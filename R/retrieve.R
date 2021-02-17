@@ -34,12 +34,14 @@ retrieve_reads <- function(
   }
 
   ## Prepare command to get data from ENA.
-  command <- str_c(
-    "enaDataGet",
-    "-f", "fastq",
-    "-d", outdir,
-    sep = " "
-  )
+  # command <- str_c(
+  #   "enaDataGet",
+  #   "-f", "fastq",
+  #   "-d", outdir,
+  #   sep = " "
+  # )
+  
+  command <- str_glue("parallel -I ,, -j {cores} enaDataGet -f fastq -d {outdir} ,, ::: {str_c(asscessions, collapse=" "}")
 
   command <- map(accessions, function(x) {
     str_c(command, x, sep = " ")
