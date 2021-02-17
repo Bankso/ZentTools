@@ -19,7 +19,7 @@ r-base r-devtools r-tidyverse r-data.table r-ggpubr \
 bioconductor-edger bioconductor-deseq2 bioconductor-rsubread \
 bioconductor-chipseeker bioconductor-rsamtools \
 fastqc star samtools bowtie2 deeptools bedtools macs2 \
-requests enabrowsertools parallel
+requests parallel
 
 ## Update environment.
 
@@ -37,6 +37,10 @@ apt-get -y update
 apt-get -y install build-essential zlib1g-dev
 
 R --slave -e "Sys.setenv(TAR='/bin/tar'); devtools::install_github('rpolicastro/ZentTools',ref='master')"
+
+## install updated version of enaDataGet.
+
+git clone https://github.com/rpolicastro/enaBrowserTools.git
 
 %environment
 
