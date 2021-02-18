@@ -34,20 +34,21 @@ retrieve_reads <- function(
   }
 
   ## Prepare command to get data from ENA.
-  command <- str_c(
-    "enaDataGet",
-    "-f", "fastq",
-    "-d", outdir,
-    sep = " "
+  # command <- str_c(
+  #   "enaDataGet",
+  #   "-f", "fastq",
+  #   "-d", outdir,
+  #   sep = " "
+  # )
+  
+  cores <- pull_setting(zent_obj, "ncores")
+  command <- str_glue(
+    "parallel -I ,, -j {cores} enaDataGet -f fastq -d {outdir} ,, ::: {str_c(accessions, collapse=' ')}"
   )
-
-  command <- map(accessions, function(x) {
-    str_c(command, x, sep = " ")
-  })
 
   ## Run the enaDataGet command.
   print_message("Retrieving the FASTQ files.")
-  walk(command, system)#, ignore.stdout = TRUE, ignore.stderr = TRUE)
+  system(command)
 
   ## Update the sample sheet.
   sample_sheet <- copy(zent_obj@sample_sheet)
