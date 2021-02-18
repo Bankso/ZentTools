@@ -1,7 +1,7 @@
 
 #' Retrieve Reads from SRA
 #'
-#' @importFrom stringr str_c str_detect
+#' @importFrom stringr str_c str_detect str_glue
 #' @importFrom purrr walk map
 #'
 #' @param zent_obj Zent object.
