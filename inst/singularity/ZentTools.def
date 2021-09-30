@@ -38,9 +38,11 @@ apt-get -y install build-essential zlib1g-dev
 
 R --slave -e "Sys.setenv(TAR='/bin/tar'); devtools::install_github('obanks/ZentTools',ref='master')"
 
-## install updated version of enaDataGet.
+## install updated versions of enaDataGet and SEACR.
 
 git clone https://github.com/rpolicastro/enaBrowserTools.git
+git clone https://github.com/FredHutch/SEACR/blob/master/SEACR_1.3.R
+git clone https://github.com/FredHutch/SEACR/blob/master/SEACR_1.3.sh
 
 %environment
 

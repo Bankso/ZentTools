@@ -26,8 +26,7 @@ setClass(
 #' @import data.table
 #'
 #' @param sample_sheet Either a data.frame or delimited file.
-#' @param analysis_type Either 'RNA-seq' or 'ChIP-seq'.
-#'   Only 'RNA-seq' is currently available.
+#' @param analysis_type One of 'RNA-seq', 'ChIP-seq', 'ChEC-seq', or 'SChEC-seq'.
 #' @param sep If the sample sheet is a file, this specifies the delimiter.
 #' @param paired Whether the run is paired (TRUE) or unpaired (FALSE)
 #' @param ncores The number of cores/threads to use.
@@ -53,7 +52,7 @@ zent_tools <- function(
 
   samples[is.na(samples)] <- NA_character_
 
-  if (analysis_type %in% c("ChEC-seq", "ChIP-seq")) {
+  if (analysis_type %in% c("SChEC-seq", "ChEC-seq", "ChIP-seq")) {
     samples[
       !is.na(control_name),
       c("control_file_1", "control_file_2", "control_name") := list(
